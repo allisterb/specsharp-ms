@@ -1,9 +1,9 @@
 @echo off
 xcopy /Q /Y ..\Runtime\bin\Microsoft.SpecSharp.Runtime.* .
-xcopy /Q /Y ..\CommandLineCompiler\bin\System.Compiler.* .
-xcopy /Q /Y ..\CommandLineCompiler\bin\Microsoft.SpecSharp.* .
-xcopy /Q /Y ..\CommandLineCompiler\bin\Microsoft.VisualStudio.* .
-xcopy /Q /Y ..\CommandLineCompiler\bin\ssc.exe .
+xcopy /Q /Y ..\..\bin\System.Compiler.* .
+xcopy /Q /Y ..\..\bin\Microsoft.SpecSharp.* .
+xcopy /Q /Y ..\..\bin\Microsoft.VisualStudio.* .
+xcopy /Q /Y ..\..\\bin\ssc.exe .
 
 set errors=0
 set test=%1
