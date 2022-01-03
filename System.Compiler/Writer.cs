@@ -5242,8 +5242,8 @@ namespace System.Compiler{
           if (!Writer.StrongNameSignatureGeneration(location, keyName, assem.KeyBlob, assem.KeyBlob == null ? 0 : assem.KeyBlob.Length, IntPtr.Zero, IntPtr.Zero))
             throw new AssemblyCouldNotBeSignedException();
         }catch{
-          if (!Writer.MscorsnStrongNameSignatureGeneration(location, keyName, assem.KeyBlob, assem.KeyBlob == null ? 0 : assem.KeyBlob.Length, IntPtr.Zero, IntPtr.Zero))
-            throw new AssemblyCouldNotBeSignedException();
+//          if (!Writer.MscorsnStrongNameSignatureGeneration(location, keyName, assem.KeyBlob, assem.KeyBlob == null ? 0 : assem.KeyBlob.Length, IntPtr.Zero, IntPtr.Zero))
+//            throw new AssemblyCouldNotBeSignedException();
         }
       }
     }
@@ -5258,10 +5258,11 @@ namespace System.Compiler{
       int      cbKeyBlob,
       IntPtr     ppbSignatureBlob,   // [out] signature blob
       IntPtr      pcbSignatureBlob);
-    [DllImport("mscorsn.dll", EntryPoint="StrongNameSignatureGeneration",  
+    /*
+     [DllImport("mscorsn.dll", EntryPoint="StrongNameSignatureGeneration",  
        SetLastError=true, CharSet=CharSet.Unicode, ExactSpelling=true,
        CallingConvention=CallingConvention.StdCall)]
-    private static extern bool MscorsnStrongNameSignatureGeneration(
+     /private static extern bool MscorsnStrongNameSignatureGeneration(
       string     wszFilePath,        // [in] valid path to the PE file for the assembly
       string     wszKeyContainer,    // [in] desired key container name
       [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 4)]
@@ -5269,6 +5270,7 @@ namespace System.Compiler{
       int      cbKeyBlob,
       IntPtr     ppbSignatureBlob,   // [out] signature blob
       IntPtr      pcbSignatureBlob);
+    */
     private unsafe static byte[] GetPublicKey(AssemblyNode/*!*/ assem) {
       Debug.Assert(assem != null);
       IntPtr publicKey = IntPtr.Zero;
