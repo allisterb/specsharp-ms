@@ -374,9 +374,7 @@ class main{
     options.GenerateExecutable = true;
     options.MayLockFiles = true;
     options.GenerateInMemory = true;
-    // Code that is not marked as unsafe should be verifiable. This catches cases where the compiler generates bad IL.
-    if (!options.AllowUnsafeCode)
-      options.Evidence = new System.Security.Policy.Evidence(new object[] {new System.Security.Policy.Zone(System.Security.SecurityZone.Internet)}, null);
+    
     CompilerResults results = compiler.CompileAssemblyFromSource(options, test);
     foreach (CompilerError e in results.Errors){
       Console.Write('(');

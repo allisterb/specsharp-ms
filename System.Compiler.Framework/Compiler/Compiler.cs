@@ -2052,16 +2052,16 @@ namespace System.Compiler{
       }
       if (results.NativeCompilerReturnValue != 0) return; //TODO: allow option to override this
       if (options.GenerateInMemory){
-        System.Security.Policy.Evidence evidence = options.Evidence;
+        
         CompilerOptions cOptions = options as CompilerOptions;
         System.AppDomain targetDomain = cOptions == null ? null : cOptions.TargetAppDomain;
         if (targetDomain == null) targetDomain = AppDomain.CurrentDomain;
         for (int i = 0, n = arefs == null ? 0 : arefs.Count; i < n; i++){
           AssemblyReference aref = arefs[i];
           if (aref == null || aref.Assembly == null) continue;
-          aref.Assembly.GetRuntimeAssembly(evidence, targetDomain);
+          aref.Assembly.GetRuntimeAssembly(targetDomain);
         }
-        results.CompiledAssembly = assem.GetRuntimeAssembly(evidence, targetDomain);
+        results.CompiledAssembly = assem.GetRuntimeAssembly(targetDomain);
       }else{
         ErrorNodeList errors = new ErrorNodeList(0);
         string fileName = this.GetTargetFileName(options, errors);

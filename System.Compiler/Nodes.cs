@@ -1064,7 +1064,7 @@ namespace System.Compiler{
         foreach (string s in source.EmbeddedResources) this.EmbeddedResources.Add(s);
       this.EmitManifest = source.EmitManifest;
       this.EncodeOutputInUTF8 = source.EncodeOutputInUTF8;
-      this.Evidence = source.Evidence;
+      //this.Evidence = source.Evidence;
       this.ExplicitOutputExtension = source.ExplicitOutputExtension;
       this.FileAlignment = source.FileAlignment;
       this.FullyQualifyPaths = source.FullyQualifyPaths;
@@ -6247,21 +6247,16 @@ namespace System.Compiler{
     }
     private CachedRuntimeAssembly cachedRuntimeAssembly;
     public System.Reflection.Assembly GetRuntimeAssembly(){
-      return this.GetRuntimeAssembly(null, null);
+      return this.GetRuntimeAssembly(null);
     }
 #endif
 #if !NoReflection
-    public System.Reflection.Assembly GetRuntimeAssembly(System.Security.Policy.Evidence evidence){
-      return this.GetRuntimeAssembly(evidence, null);
-    }
+    
     public System.Reflection.Assembly GetRuntimeAssembly(AppDomain targetAppDomain){
-      return this.GetRuntimeAssembly(null, targetAppDomain);
-    }
-    public System.Reflection.Assembly GetRuntimeAssembly(System.Security.Policy.Evidence evidence, AppDomain targetAppDomain){
       System.Reflection.Assembly result = this.cachedRuntimeAssembly == null ? null : this.cachedRuntimeAssembly.Value;
-      if (result == null || evidence != null || targetAppDomain != null){
+      if (result == null || targetAppDomain != null){
         lock(this){
-          if (this.cachedRuntimeAssembly != null && evidence == null && targetAppDomain == null) return this.cachedRuntimeAssembly.Value;
+          if (this.cachedRuntimeAssembly != null && targetAppDomain == null) return this.cachedRuntimeAssembly.Value;
           if (targetAppDomain == null) targetAppDomain = AppDomain.CurrentDomain;
           if (this.Location != null){
             string name = this.StrongName;
@@ -6275,9 +6270,6 @@ namespace System.Compiler{
                 }
               }
             if (result == null){
-              if (evidence != null)
-                result = targetAppDomain.Load(this.GetAssemblyName(), evidence);
-              else
                 result = targetAppDomain.Load(this.GetAssemblyName());
             }
           }
@@ -6290,20 +6282,13 @@ namespace System.Compiler{
             byte[] debugSymbols = null;
             if ((this.Flags & (AssemblyFlags.EnableJITcompileTracking|AssemblyFlags.DisableJITcompileOptimizer)) != 0){
               this.WriteModule(out executable, out debugSymbols);
-              if (evidence != null)
-                result = targetAppDomain.Load(executable, debugSymbols, evidence);
-              else
-                result = targetAppDomain.Load(executable, debugSymbols);
+              result = targetAppDomain.Load(executable, debugSymbols);
             }else{
-              this.WriteModule(out executable);
-              if (evidence != null)
-                result = targetAppDomain.Load(executable, null, evidence);
-              else
                 result = targetAppDomain.Load(executable);
             }        
           }
 #endif
-          if (result != null && evidence == null && targetAppDomain == AppDomain.CurrentDomain){
+          if (result != null && targetAppDomain == AppDomain.CurrentDomain){
             this.AddCachedAssembly(result);
             this.cachedRuntimeAssembly = new CachedRuntimeAssembly(result);
           }

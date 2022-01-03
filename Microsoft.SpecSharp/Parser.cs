@@ -6089,7 +6089,7 @@ namespace Microsoft.SpecSharp{
       }catch(OverflowException){
         this.HandleError(ctx, Error.IntOverflow);
         result = new Literal(0);
-      }catch(ExecutionEngineException){
+      }catch(Exception){
         this.HandleError(ctx, Error.IntOverflow);
         result = new Literal(0);
       }
