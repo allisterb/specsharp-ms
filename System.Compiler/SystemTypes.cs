@@ -220,7 +220,17 @@ namespace System.Compiler{
                     "2.0.0.0", "2.0.0.0", "2.0.0.0", "2.0.0.0", "2.0.0.0",
                     "2.0.0.0", "2.0.0.0", "2.0.0.0", "2.0.0.0", "2.0.0.0", "8.0.0.0",
                     "2.0.0.0", "2.0.0.0", "2.0.0.0", "2.0.0.0", "2.0.0.0", "2.0.0.0", "2.0.0.0", "2.0.0.0"};
-    private static void SetupAssemblyReferenceFor() {
+    private static string[]/*!*/ FxAssemblyVersion4 =
+        new string[]{"2.0.0.0", "2.0.0.0", "2.0.0.0", "2.0.0.0", "2.0.0.0", "2.0.0.0",
+                "8.0.0.0", "8.0.0.0", "8.0.0.0", "8.0.0.0",
+                "8.0.0.0", "8.0.0.0", "2.0.0.0", "2.0.0.0", "2.0.0.0",
+                "2.0.0.0", "2.0.0.0", "2.0.0.0", "2.0.0.0",
+                "2.0.0.0", "2.0.0.0", "2.0.0.0",
+                "2.0.0.0", "2.0.0.0", "2.0.0.0", "2.0.0.0",
+                "2.0.0.0", "2.0.0.0", "2.0.0.0", "2.0.0.0", "2.0.0.0",
+                "2.0.0.0", "2.0.0.0", "2.0.0.0", "2.0.0.0", "2.0.0.0", "8.0.0.0",
+                "2.0.0.0", "2.0.0.0", "2.0.0.0", "2.0.0.0", "2.0.0.0", "2.0.0.0", "2.0.0.0", "2.0.0.0"};
+        private static void SetupAssemblyReferenceFor() {
       Version version = TargetPlatform.TargetVersion;
       if (version == null) version = typeof(object).Module.Assembly.GetName().Version;
       TargetPlatform.SetTo(version);
@@ -405,7 +415,7 @@ namespace System.Compiler{
       TrivialHashtable assemblyReferenceFor = new TrivialHashtable(46);
       for (int i = 0, n = TargetPlatform.FxAssemblyNames.Length; i < n; i++) {
         string name = TargetPlatform.FxAssemblyNames[i];
-        string version = TargetPlatform.FxAssemblyVersion2[i];
+        string version = TargetPlatform.FxAssemblyVersion4[i];
         string token = TargetPlatform.FxAssemblyToken[i];
         AssemblyReference aref = new AssemblyReference(name+", Version="+version+", Culture=neutral, PublicKeyToken="+token);
         aref.Location = platformAssembliesLocation+"\\"+name+".dll";

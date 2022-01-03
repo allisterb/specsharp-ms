@@ -104,10 +104,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\System.Compiler\System.Compiler.csproj">
-      <Project>{D7E16B38-3893-4EEF-847F-A3BE807E9546}</Project>
-      <Name>System.Compiler</Name>
-    </ProjectReference>
     <Reference Include="Mscorlib">
       <Name>Mscorlib</Name>
     </Reference>
@@ -124,10 +120,6 @@
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
-    <ProjectReference Include="..\System.Compiler.Runtime\System.Compiler.Runtime.csproj">
-      <Project>{5BEE6906-9652-47B4-B617-368E9598B449}</Project>
-      <Name>System.Compiler.Runtime</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Common\Include\version.cs">
@@ -258,6 +250,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\System.Compiler.Runtime\System.Compiler.Runtime.csproj">
+      <Project>{5bee6906-9652-47b4-b617-368e9598b449}</Project>
+      <Name>System.Compiler.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\System.Compiler\System.Compiler.csproj">
+      <Project>{d7e16b38-3893-4eef-847f-a3be807e9546}</Project>
+      <Name>System.Compiler</Name>
+    </ProjectReference>
   </ItemGroup>
   <!-- <Import Project="$(SpecSharpBinPath)\Microsoft.SpecSharp.Targets" /> -->
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

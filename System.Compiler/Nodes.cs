@@ -927,7 +927,7 @@ namespace System.Compiler{
   }
 #endif
 #if !NoWriter
-  public enum PlatformType{notSpecified, v1, v11, v2, cli1}
+  public enum PlatformType{notSpecified, v1, v11, v2, v4, cli1}
   public class CompilerOptions: System.CodeDom.Compiler.CompilerParameters{
     public StringCollection AliasesForReferencedAssemblies;
     public ModuleKindFlags ModuleKind = ModuleKindFlags.ConsoleApplication;

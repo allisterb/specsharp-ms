@@ -114,6 +114,7 @@ class main{
       case PlatformType.v1: Microsoft.SpecSharp.TargetPlatform.SetToV1(options.TargetPlatformLocation); break;
       case PlatformType.v11: Microsoft.SpecSharp.TargetPlatform.SetToV1_1(options.TargetPlatformLocation); break;
       case PlatformType.v2: Microsoft.SpecSharp.TargetPlatform.SetToV2(options.TargetPlatformLocation); break;
+      case PlatformType.v4: Microsoft.SpecSharp.TargetPlatform.SetToV4(options.TargetPlatformLocation); break;
       default: 
         if (options.TargetPlatformLocation != null) //TODO: assert not null
           Microsoft.SpecSharp.TargetPlatform.SetToPostV1_1(options.TargetPlatformLocation);

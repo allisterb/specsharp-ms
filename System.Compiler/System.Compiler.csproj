@@ -288,7 +288,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\System.Compiler.Runtime\System.Compiler.Runtime.csproj">
-      <Project>{5BEE6906-9652-47B4-B617-368E9598B449}</Project>
+      <Project>{5bee6906-9652-47b4-b617-368e9598b449}</Project>
       <Name>System.Compiler.Runtime</Name>
     </ProjectReference>
   </ItemGroup>

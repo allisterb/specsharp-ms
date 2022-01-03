@@ -102,20 +102,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Microsoft.SpecSharp.csproj">
-      <Project>{0B747571-5739-4A09-B368-2FF47C01A698}</Project>
-      <Name>Microsoft.SpecSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\System.Compiler.Framework\System.Compiler.Framework.csproj">
-      <Project>{5D3B8B5B-703E-4843-ABF3-A864F5B6ADA3}</Project>
-      <Name>System.Compiler.Framework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\System.Compiler\System.Compiler.csproj">
-      <Project>{D7E16B38-3893-4EEF-847F-A3BE807E9546}</Project>
-      <Name>System.Compiler</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\..\Common\InterimKey.snk">
       <Link>InterimKey.snk</Link>
     </None>
@@ -141,11 +127,21 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.SpecSharp.Runtime, Version=1.0.21126.0, Culture=neutral, PublicKeyToken=736440c9b414ea16, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\bin\Microsoft.SpecSharp.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\System.Compiler.Framework\System.Compiler.Framework.csproj">
+      <Project>{5d3b8b5b-703e-4843-abf3-a864f5b6ada3}</Project>
+      <Name>System.Compiler.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\System.Compiler\System.Compiler.csproj">
+      <Project>{d7e16b38-3893-4eef-847f-a3be807e9546}</Project>
+      <Name>System.Compiler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.SpecSharp.csproj">
+      <Project>{0b747571-5739-4a09-b368-2ff47c01a698}</Project>
+      <Name>Microsoft.SpecSharp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

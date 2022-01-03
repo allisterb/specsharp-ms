@@ -605,6 +605,7 @@ namespace Microsoft.SpecSharp
           case Cci.PlatformType.v1: Microsoft.SpecSharp.TargetPlatform.SetToV1(options.TargetPlatformLocation); break;
           case Cci.PlatformType.v11: Microsoft.SpecSharp.TargetPlatform.SetToV1_1(options.TargetPlatformLocation); break;
           case Cci.PlatformType.v2: Microsoft.SpecSharp.TargetPlatform.SetToV2(options.TargetPlatformLocation); break;
+          case Cci.PlatformType.v4: Microsoft.SpecSharp.TargetPlatform.SetToV4(options.TargetPlatformLocation); break;
           default:
             if (options.TargetPlatformLocation != null)
               Microsoft.SpecSharp.TargetPlatform.SetToPostV1_1(options.TargetPlatformLocation);
@@ -907,6 +908,7 @@ namespace Microsoft.SpecSharp
       if (string.Compare(targetType, "v1", true, CultureInfo.InvariantCulture) == 0) return Cci.PlatformType.v1;
       if (string.Compare(targetType, "v11", true, CultureInfo.InvariantCulture) == 0) return Cci.PlatformType.v11;
       if (string.Compare(targetType, "v2", true, CultureInfo.InvariantCulture) == 0) return Cci.PlatformType.v2;
+      if (string.Compare(targetType, "v4", true, CultureInfo.InvariantCulture) == 0) return Cci.PlatformType.v4;
       if (string.Compare(targetType, "cli1", true, CultureInfo.InvariantCulture) == 0) return Cci.PlatformType.cli1;
       //TODO: log message about invalid option in build file if the string is not empty/blank
       return Cci.PlatformType.notSpecified;

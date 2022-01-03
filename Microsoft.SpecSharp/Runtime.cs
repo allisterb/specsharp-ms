@@ -60,12 +60,17 @@ namespace Microsoft.SpecSharp{
       Cci.TargetPlatform.SetToV2(platformAssembliesLocation);
       RuntimeAssemblyLocation.Location = Path.Combine(Path.GetDirectoryName(SystemAssemblyLocation.Location), "Microsoft.SpecSharp.Runtime.dll");
     }
-    /// <summary>
-    /// Use this to set the target platform to a platform with a superset of the platform assemblies in version 1.1, but
-    /// where the public key tokens and versions numbers are determined by reading in the actual assemblies from
-    /// the supplied location. Only assemblies recognized as platform assemblies in version 1.1 will be unified.
-    /// </summary>
-    public static void SetToPostV1_1(string platformAssembliesLocation){
+    public static void SetToV4(string platformAssembliesLocation)
+    {
+        Cci.TargetPlatform.SetToV4(platformAssembliesLocation);
+        RuntimeAssemblyLocation.Location = Path.Combine(Path.GetDirectoryName(SystemAssemblyLocation.Location), "Microsoft.SpecSharp.Runtime.dll");
+    }
+        /// <summary>
+        /// Use this to set the target platform to a platform with a superset of the platform assemblies in version 1.1, but
+        /// where the public key tokens and versions numbers are determined by reading in the actual assemblies from
+        /// the supplied location. Only assemblies recognized as platform assemblies in version 1.1 will be unified.
+        /// </summary>
+        public static void SetToPostV1_1(string platformAssembliesLocation){
       Cci.TargetPlatform.SetToPostV1_1(platformAssembliesLocation);
       RuntimeAssemblyLocation.Location = Path.Combine(Path.GetDirectoryName(SystemAssemblyLocation.Location), "Microsoft.SpecSharp.Runtime.dll");
     }
