@@ -6,6 +6,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 #if FxCop
 using InterfaceList = Microsoft.Cci.InterfaceCollection;
 using TypeNodeList = Microsoft.Cci.TypeNodeCollection;
@@ -115,9 +116,9 @@ namespace System.Compiler{
     public static System.Collections.IDictionary StaticAssemblyCache {
       get { return Reader.StaticAssemblyCache; }
     }
-    public static Version TargetVersion =
+        public static Version TargetVersion =
 #if WHIDBEY
- new Version(4, 0, 30319);  // Default for a WHIDBEY compiler
+            typeof(object).Module.Assembly.GetName().Version;//new Version(4, 0, 30319);  // Default for a WHIDBEY compiler
 #else
       new Version(1, 0, 5000);  // Default for an Everett compiler
 #endif
@@ -403,24 +404,28 @@ namespace System.Compiler{
       TargetPlatform.SetToV4(TargetPlatform.PlatformAssembliesLocation);
     }
     public static void SetToV4(string platformAssembliesLocation) {
-      TargetPlatform.TargetVersion = new Version(4, 0);
-      TargetPlatform.TargetRuntimeVersion = "v4.0.30319";
+      TargetPlatform.TargetVersion = typeof(object).Module.Assembly.GetName().Version;
+      TargetPlatform.TargetRuntimeVersion = typeof(object).Module.Assembly.GetName().Version.ToString(3);
       TargetPlatform.GenericTypeNamesMangleChar = '`';
       if (platformAssembliesLocation == null || platformAssembliesLocation.Length == 0)
-        platformAssembliesLocation = TargetPlatform.PlatformAssembliesLocation = Path.Combine(Path.GetDirectoryName(typeof(object).Module.Assembly.Location), "..\\v4.0.30319");
+        platformAssembliesLocation = TargetPlatform.PlatformAssembliesLocation = Path.Combine(Path.GetDirectoryName(typeof(object).Module.Assembly.Location));
       else
         TargetPlatform.PlatformAssembliesLocation = platformAssembliesLocation;
       TargetPlatform.PlatformAssembliesLocation = platformAssembliesLocation;
       TargetPlatform.InitializeStandardAssemblyLocationsWithDefaultValues(platformAssembliesLocation);
       TrivialHashtable assemblyReferenceFor = new TrivialHashtable(46);
-      for (int i = 0, n = TargetPlatform.FxAssemblyNames.Length; i < n; i++) {
-        string name = TargetPlatform.FxAssemblyNames[i];
-        string version = TargetPlatform.FxAssemblyVersion4[i];
-        string token = TargetPlatform.FxAssemblyToken[i];
-        AssemblyReference aref = new AssemblyReference(name+", Version="+version+", Culture=neutral, PublicKeyToken="+token);
-        aref.Location = platformAssembliesLocation+"\\"+name+".dll";
-        //^ assume name != null;
-        assemblyReferenceFor[Identifier.For(name).UniqueIdKey] = aref;
+      string[] dlls = Directory.GetFiles(platformAssembliesLocation, "*.dll");
+      foreach (string dll in dlls)
+      {
+        if (dll == null) continue;
+        string assemName = Path.GetFileNameWithoutExtension(dll);
+        int i = Array.IndexOf(TargetPlatform.FxAssemblyNames, assemName);
+        if (i < 0) continue;
+        var asm = System.Reflection.Assembly.LoadFile(dll);
+        var name = asm.GetName().ToString();
+        AssemblyReference aref = new AssemblyReference(name);
+        aref.Location = dll;
+        assemblyReferenceFor[Identifier.For(asm.GetName().Name).UniqueIdKey] = aref;
       }
       TargetPlatform.assemblyReferenceFor = assemblyReferenceFor;
 #if ExtendedRuntime
@@ -481,13 +486,14 @@ namespace System.Compiler{
 #endif
     }
     private static void InitializeStandardAssemblyLocationsWithDefaultValues(string platformAssembliesLocation){
-      SystemAssemblyLocation.Location = platformAssembliesLocation+"\\mscorlib.dll";
+            SystemAssemblyLocation.Location = typeof(object).Module.Assembly.Location;
+            //var o = CoreSystemTypes.Object;
 #if ExtendedRuntime
-      if (SystemCompilerRuntimeAssemblyLocation.Location == null)
+            if (SystemCompilerRuntimeAssemblyLocation.Location == null)
 #if CCINamespace
         SystemCompilerRuntimeAssemblyLocation.Location = platformAssembliesLocation+"\\Microsoft.Cci.Runtime.dll";
 #else
-        SystemCompilerRuntimeAssemblyLocation.Location = platformAssembliesLocation+"\\system.compiler.runtime.dll";
+        SystemCompilerRuntimeAssemblyLocation.Location = "system.compiler.runtime.dll";
 #endif
       // If the System.Compiler.Runtime assembly does not exist at this location, DO NOTHING (don't load another one)
       // as this signals the fact that the types may need to be loaded from the SystemAssembly instead.

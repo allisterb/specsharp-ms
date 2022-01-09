@@ -142,10 +142,6 @@
       <Project>{0B747571-5739-4A09-B368-2FF47C01A698}</Project>
       <Name>Microsoft.SpecSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Runtime\Microsoft.SpecSharp.Runtime.sscproj">
-      <Project>{76439EA5-A08D-4B58-BF7B-BE6D68668885}</Project>
-      <Name>Microsoft.SpecSharp.Runtime</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="main.cs">
