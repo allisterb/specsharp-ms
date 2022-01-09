@@ -453,12 +453,12 @@ namespace System
         public static String Join (String separator, String[]! value)
             requires value != null otherwise ArgumentNullException;
             
-        [Pure][Reads(ReadsAttribute.Reads.Nothing)] 
+        [Pure][Reads(ReadsAttribute.Reads.Owned)] 
         public bool Contains(char value)
           ensures result ==> 0 <= this.IndexOf(value) && this.IndexOf(value) < this.Length;
           ensures !result ==> this.IndexOf(value) == -1;
           
-        [Pure][Reads(ReadsAttribute.Reads.Nothing)] 
+        [Pure][Reads(ReadsAttribute.Reads.Owned)] 
         public bool Contains(String value)
           requires value != null otherwise ArgumentNullException;
           ensures result ==> 0 <= this.IndexOf(value) && this.IndexOf(value) < this.Length;

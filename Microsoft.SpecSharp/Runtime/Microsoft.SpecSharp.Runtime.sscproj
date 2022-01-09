@@ -15,7 +15,7 @@
          TargetPlatformLocation=""
          NoStandardLibraries="True"
          ShadowedAssembly=""
-         TargetPlatform="v2"
+         TargetPlatform="v4"
         >
         <Config Name="Debug"
            AllowUnsafeBlocks="False"

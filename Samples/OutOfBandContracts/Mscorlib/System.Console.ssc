@@ -22,21 +22,21 @@ namespace System
         {
           [Pure][Reads(ReadsAttribute.Reads.Nothing)]  // the getter always returns the same result (this is the best way we have now to specify that)
           get;
-            ensures result.IsPeerConsistent;
+            // ensures result.IsPeerConsistent;
         }
 
         public static System.IO.TextReader! In
         {
           [Pure][Reads(ReadsAttribute.Reads.Nothing)]  // the getter always returns the same result (this is the best way we have now to specify that)
           get;
-            ensures result.IsPeerConsistent;
+            // ensures result.IsPeerConsistent;
         }
 
         public static System.IO.TextWriter! Out
         {
           [Pure][Reads(ReadsAttribute.Reads.Nothing)]  // the getter always returns the same result (this is the best way we have now to specify that)
           get;
-            ensures result.IsPeerConsistent;
+            // ensures result.IsPeerConsistent;
         }
 
         public static void Write (string value);

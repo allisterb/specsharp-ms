@@ -217,7 +217,7 @@ namespace System
             requires array.Rank == 1 otherwise RankException;
             ensures array.GetLowerBound(0)-1 <= result && result <= array.GetUpperBound(0);
 
-        [Pure]
+        
         public object! Clone ()
             ensures result.GetType() == this.GetType();
             ensures Owner.New(result);
