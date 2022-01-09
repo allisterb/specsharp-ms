@@ -156,7 +156,7 @@ namespace Microsoft.SpecSharp.Collections{
         if (index==count){
           this.Add(value);
         }else{
-          vec = (!)vec.Clone();
+          vec = vec.Clone();
           vec[index] = value;
         }
       }
@@ -180,7 +180,7 @@ namespace Microsoft.SpecSharp.Collections{
     /// </summary>
     public int Add(object! o){
       if (vec == null) vec = new Vec();
-      if (count != vec.Count) vec = (!)vec.Clone();
+      if (count != vec.Count) vec = vec.Clone();
       count++;
       return vec.Add(o);  
     }
@@ -591,7 +591,7 @@ namespace Microsoft.SpecSharp.Collections{
                 return new LazyRedBlackTreeEnumerator(t.right);         
               break;
             case 3 : 
-              return (!)Stream.Empty;
+              return Stream.Empty;
           }
         }
       }
