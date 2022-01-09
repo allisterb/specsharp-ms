@@ -219,7 +219,7 @@ namespace System
 
         
         public object! Clone ()
-            ensures result.GetType() == this.GetType();
+            ensures result.GetType().Equals((object) this.GetType());
             ensures Owner.New(result);
 
 

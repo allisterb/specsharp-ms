@@ -63,7 +63,7 @@ namespace System
           ensures ((object)a) == null && ((object)b) == null ==> ((object)result) == null;
           ensures ((object)a) == null && ((object)b) != null ==> ((object)result) == null;
           ensures ((object)a) != null && ((object)b) == null ==> ((object)result) == (object)a;
-          ensures ((object)a) != null && ((object)b) != null ==> ((object)result) != null && result.GetType() == a.GetType() && Owner.Same(result, a);
+          //ensures !(((object)a).Equals(null)) && !(((object)b).Equals(null)) ==> !(((object)result).Equals(null)) && result.GetType().Equals(a.GetType()) && Owner.Same(result, a);
 
         public Delegate[] GetInvocationList ();
 
@@ -73,7 +73,7 @@ namespace System
           ensures ((object)a) == null && ((object)b) == null ==> ((object)result) == null;
           ensures ((object)a) == null && ((object)b) != null ==> ((object)result) == (object)b;
           ensures ((object)a) != null && ((object)b) == null ==> ((object)result) == (object)a;
-          ensures ((object)a) != null && ((object)b) != null ==> ((object)result) != null && result.GetType() == a.GetType() && Owner.Same(result, a);
+          // ensures ((object)a) != null && ((object)b) != null ==> ((object)result) != null && result.GetType() == a.GetType() && Owner.Same(result, a);
 
         [Pure][Reads(ReadsAttribute.Reads.Owned)]
         public int GetHashCode ();

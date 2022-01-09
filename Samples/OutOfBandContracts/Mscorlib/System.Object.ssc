@@ -22,7 +22,7 @@ namespace System
       [Pure][Reads(ReadsAttribute.Reads.Nothing)][ResultNotNewlyAllocated]
       public Type! GetType ();
       protected object! MemberwiseClone()
-        ensures result.GetType() == (object)this.GetType();
+        ensures result.GetType().Equals((object)this.GetType());
       [Pure][Reads(ReadsAttribute.Reads.Nothing)]
       public bool Equals(Object obj);
       [Pure][Reads(ReadsAttribute.Reads.Nothing)]
