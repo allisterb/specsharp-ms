@@ -202,7 +202,7 @@ namespace System.Compiler{
     /// <summary>The preconditions, postconditions, and modifies clauses of this method.</summary>
     public virtual MethodContract/*?*/ Contract {
       get;
-        ensures result != null ==> Owner.Is(result, this, typeof(Method));        
+        // ensures result != null ==> Owner.Is(result, this, typeof(Method));        
       set; 
     }
 

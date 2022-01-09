@@ -12,7 +12,7 @@
          RootNamespace="OutOfBandContracts"
          StartupObject=""
          StandardLibraryLocation=""
-         TargetPlatform="v2"
+         TargetPlatform="v4"
          TargetPlatformLocation=""
          ShadowedAssembly="..\..\..\System.Compiler\bin\System.Compiler.dll"
          NoStandardLibraries="True"
@@ -66,7 +66,7 @@
         <Reference Name="mscorlib"
              AssemblyName="mscorlib"
              Private="false"
-             HintPath="../../../../../../Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll"
+             HintPath="C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll"
              />
       </References>
     </Build>
