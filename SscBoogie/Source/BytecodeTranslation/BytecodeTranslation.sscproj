@@ -61,21 +61,21 @@
       <References>
         <Reference Name="Microsoft.SpecSharp"
              AssemblyName="Microsoft.SpecSharp"
-             Private="false"
+             Private="true"
              HintPath="..\..\..\bin\Microsoft.SpecSharp.dll"
              />
         <Reference Name="System"
              AssemblyName="System"
-             Private="false"
+             Private="true"
              />
         <Reference Name="System.Compiler.Framework"
              AssemblyName="System.Compiler.Framework"
-             Private="false"
+             Private="true"
              HintPath="..\..\..\bin\System.Compiler.Framework.dll"
              />
         <Reference Name="System.Compiler"
              AssemblyName="System.Compiler"
-             Private="false"
+             Private="true"
              HintPath="..\..\..\bin\System.Compiler.dll"
              />
         <Reference Name="Basetypes"

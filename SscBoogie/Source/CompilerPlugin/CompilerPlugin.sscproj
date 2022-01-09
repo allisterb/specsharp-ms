@@ -12,7 +12,7 @@
          RootNamespace="Microsoft.Boogie"
          StartupObject=""
          StandardLibraryLocation=""
-         TargetPlatform="v2"
+         TargetPlatform="v4"
          TargetPlatformLocation=""
          ShadowedAssembly=""
         >
@@ -27,7 +27,7 @@
            FileAlignment="4096"
            IncrementalBuild="True"
            Optimize="False"
-           OutputPath="..\..\Binaries"
+           OutputPath="bin\Debug"
            RegisterForComInterop="False"
            RemoveIntegerChecks="false"
            TreatWarningsAsErrors="False"
@@ -65,18 +65,18 @@
              />
         <Reference Name="System.Compiler.Framework"
              AssemblyName="System.Compiler.Framework"
-             Private="false"
-             HintPath="..\..\Binaries\System.Compiler.Framework.dll"
+             Private="true"
+             HintPath="..\..\..\bin\System.Compiler.Framework.dll"
              />
         <Reference Name="System.Compiler"
              AssemblyName="System.Compiler"
-             Private="false"
-             HintPath="..\..\Binaries\System.Compiler.dll"
+             Private="true"
+             HintPath="..\..\..\bin\System.Compiler.dll"
              />
         <Reference Name="Microsoft.SpecSharp"
              AssemblyName="Microsoft.SpecSharp"
-             Private="false"
-             HintPath="..\..\Binaries\Microsoft.SpecSharp.dll"
+             Private="true"
+             HintPath="..\..\..\bin\Microsoft.SpecSharp.dll"
              />
         <Reference Name="AbsInt"
              AssemblyName="AbsInt"
@@ -109,16 +109,13 @@
              HintPath="../../Binaries/VCGeneration.dll"
              />
         <Reference Name="BytecodeTranslation"
-             Project="{4B727D4B-4A43-4B11-A47D-48A6CD8D4BC1}"
-             Private="true"
+             Project="..\BytecodeTranslation\BytecodeTranslation.sscproj"
              />
         <Reference Name="DriverHelper"
-             Project="{18A0EBA3-DEDA-4F25-B21F-B86055719249}"
-             Private="true"
+             Project="..\DriverHelper\DriverHelper.sscproj"
              />
         <Reference Name="Prelude"
-             Project="{C3F39495-FAB0-4594-BDCD-921D180B5C06}"
-             Private="true"
+             Project="..\Prelude\Prelude.sscproj"
              />
         <Reference Name="ParserHelper"
              AssemblyName="ParserHelper"

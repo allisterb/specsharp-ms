@@ -435,7 +435,7 @@ namespace Microsoft.Boogie
                 if (method == null) { return null; }
 
                 // Ignore methodology methods.
-                if (method.CciKind != System.Compiler.CciMemberKind.Regular)
+                if (method.CciKind != Cci.CciMemberKind.Regular)
                     return method;
 
                 if (!ShouldVerify(method))
