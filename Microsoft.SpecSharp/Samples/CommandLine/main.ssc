@@ -27,12 +27,12 @@ namespace Play
 	{
 		static void Main (string[]! commandLineArgs)
 		{
-			if (commandLineArgs.Length != 1) return;
-			
+			//if (commandLineArgs.Length != 1) return;
+			Console.WriteLine("foo");
 			string home = Environment.GetEnvironmentVariable("HOME");
 			// Can 'home' be null? What does the contract for GetEnvironmentVariable say?
 			
-			string path = commandLineArgs[0];
+			string! path = commandLineArgs[0];
 			// Can path be null?
 			// If you're sure that the shell will never launch your program with a null 
 			// command-line argument, comment in the next line. Otherwise you 

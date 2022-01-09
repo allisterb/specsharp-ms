@@ -1,0 +1,416 @@
+using System;
+
+// This file contains some command-line options that have been refactored out of Boogie.
+// These should be incorporated into SscBoogie, but doing so requires synching SscBoogie
+// up to the latest version of the Boogie binaries.  In the meantime, the future code
+// needed on the SscBoogie side is collected in this file.
+//
+// When it is incorporated, some SscBoogie-specific options that used to be accessed as:
+//    CommandLineOptions.Clo.MyOption
+// should then be accessed as:
+//    SscBoogieOptions.O.MyOption
+// Also, the driver and compiler plug-in both need to start off my calling:
+//    SscBoogieOptions.Install(new SscBoogieOptions());
+// If it helps, see the analogous code in Dafny.
+
+#if SOON
+  /// <summary>
+  /// This class should be moved to the SscBoogie project.  It does not belong in Boogie itself.
+  /// </summary>
+  public class SscBoogieOptions : CommandLineOptions
+  {
+    public SscBoogieOptions()
+      : base("SscBoogie", "Spec# program verifier") {
+    }
+
+    private static SscBoogieOptions clo;
+    public static SscBoogieOptions O
+    {
+      get { return clo; }
+    }
+
+    public static void Install(SscBoogieOptions options) {
+      Contract.Requires(options != null);
+      clo = options;
+      CommandLineOptions.Install(options);
+    }
+
+    public bool RunningBoogieOnSsc = true; // "true" means running Boogie on ssc input while false means running it on bpl input
+    public List<string/*!*/>/*!*/ ContractAssemblies = new List<string/*!*/>();
+    public int CheckingLevel = 2;
+    public enum Methodology
+    {
+      Boogie,
+      VisibleState
+    }
+    public Methodology MethodologySelection = Methodology.Boogie;
+    public int OrderStrength = 0;
+    public bool UseArithDistributionAxioms = false;
+    public int SummationAxiomStrength = 1;
+    public int InductiveMinMax = 0;
+    public int FCOStrength = 5;
+
+    private string methodToLog = null;
+    private string methodToBreakOn = null;
+
+    [Rep]
+    private List<string/*!*/> methodsToTranslateSubstring = null;  // null means "no restriction"
+    [Rep]
+    private List<string/*!*/> methodsToTranslateMethod = null;  // null means "no restriction"
+    [Rep]
+    private List<string/*!*/> methodsToTranslateMethodQualified = null;  // null means "no restriction"
+    [Rep]
+    private List<string/*!*/> methodsToTranslateClass = null;  // null means "no restriction"
+    [Rep]
+    private List<string/*!*/> methodsToTranslateClassQualified = null;  // null means "no restriction"
+    [Rep]
+    private List<string/*!*/> methodsToTranslateFile = null;  // null means "no restriction"
+    [Rep]
+    private List<string/*!*/>/*!*/ methodsToTranslateExclude = new List<string/*!*/>();
+    [ContractInvariantMethod]
+    void ObjectInvariant5() {
+      Contract.Invariant(cce.NonNullElements(ContractAssemblies));
+      Contract.Invariant(cce.NonNullElements(methodsToTranslateClass, true));
+      Contract.Invariant(cce.NonNullElements(methodsToTranslateClassQualified, true));
+      Contract.Invariant(cce.NonNullElements(methodsToTranslateExclude));
+      Contract.Invariant(cce.NonNullElements(methodsToTranslateFile, true));
+      Contract.Invariant(cce.NonNullElements(methodsToTranslateMethod, true));
+      Contract.Invariant(cce.NonNullElements(methodsToTranslateMethodQualified, true));
+      Contract.Invariant(cce.NonNullElements(methodsToTranslateSubstring, true));
+      Contract.Invariant(0 <= CheckingLevel && CheckingLevel < 3);
+      Contract.Invariant(0 <= OrderStrength && OrderStrength < 2);
+      Contract.Invariant(0 <= SummationAxiomStrength && SummationAxiomStrength < 2);
+      Contract.Invariant(0 <= InductiveMinMax && InductiveMinMax < 6);
+      Contract.Invariant(0 <= FCOStrength && FCOStrength < 6);
+    }
+
+    private bool noConsistencyChecks = false;
+    public bool NoConsistencyChecks {
+      get {
+        return !Verify ? true : noConsistencyChecks;
+      }
+      set
+        //modifies noConsistencyChecks;
+        {
+        noConsistencyChecks = value;
+      }
+    }
+
+    public bool UserWantsMethodLogging(string methodFullName) {
+      Contract.Requires(methodFullName != null);
+      if (methodToLog == null) {
+        return false;
+      }
+      return methodToLog == "*" || methodFullName.IndexOf(methodToLog) >= 0;
+    }
+
+    public bool UserWantsToBreak(string methodFullName) {
+      Contract.Requires(methodFullName != null);
+      if (methodToBreakOn == null) {
+        return false;
+      }
+      return methodFullName.IndexOf(methodToBreakOn) >= 0;
+    }
+
+    protected override bool ParseOption(string name, CommandLineOptionEngine.CommandLineParseState ps) {
+      var args = ps.args;  // convenient synonym
+      switch (name) {
+        case "break":
+          if (ps.hasColonArgument) {
+            methodToBreakOn = args[ps.i];
+            ps.nextIndex = ps.i + 1;
+            return true;
+          }
+          break;  // let the superclass handle this one
+
+        case "translate":
+          if (methodsToTranslateSubstring == null) {
+            methodsToTranslateSubstring = new List<string/*!*/>();
+          }
+          if (ps.ConfirmArgumentCount(1)) {
+            methodsToTranslateSubstring.Add(cce.NonNull(args[ps.i]));
+          }
+          return true;
+
+        case "trMethod":
+          if (ps.ConfirmArgumentCount(1)) {
+            string m = cce.NonNull(args[ps.i]);
+            if (0 <= m.IndexOf('.')) {
+              if (methodsToTranslateMethodQualified == null) {
+                methodsToTranslateMethodQualified = new List<string/*!*/>();
+              }
+              methodsToTranslateMethodQualified.Add(m);
+            } else {
+              if (methodsToTranslateMethod == null) {
+                methodsToTranslateMethod = new List<string/*!*/>();
+              }
+              methodsToTranslateMethod.Add(m);
+            }
+          }
+          return true;
+
+        case "trClass":
+          if (ps.ConfirmArgumentCount(1)) {
+            string m = cce.NonNull(args[ps.i]);
+            if (0 <= m.IndexOf('.')) {
+              if (methodsToTranslateClassQualified == null) {
+                methodsToTranslateClassQualified = new List<string/*!*/>();
+              }
+              methodsToTranslateClassQualified.Add(m);
+            } else {
+              if (methodsToTranslateClass == null) {
+                methodsToTranslateClass = new List<string/*!*/>();
+              }
+              methodsToTranslateClass.Add(m);
+            }
+          }
+          return true;
+
+        case "trFile":
+          if (methodsToTranslateFile == null) {
+            methodsToTranslateFile = new List<string/*!*/>();
+          }
+          if (ps.ConfirmArgumentCount(1)) {
+            methodsToTranslateFile.Add(cce.NonNull(args[ps.i]));
+          }
+          return true;
+
+        case "trExclude":
+          if (ps.ConfirmArgumentCount(1)) {
+            methodsToTranslateExclude.Add(cce.NonNull(args[ps.i]));
+          }
+          return true;
+
+        case "log":
+          if (ps.hasColonArgument) {
+            methodToLog = args[ps.i];
+            ps.nextIndex = ps.i + 1;
+          } else {
+            methodToLog = "*";
+          }
+          return true;
+
+        case "contracts":
+        case "c":
+          if (ps.ConfirmArgumentCount(1)) {
+            ContractAssemblies.Add(cce.NonNull(args[ps.i]));
+          }
+          return true;
+
+        case "level":
+          ps.GetNumericArgument(ref CheckingLevel, 3);
+          return true;
+
+        case "methodology":
+          if (ps.ConfirmArgumentCount(1)) {
+            switch (args[ps.i]) {
+              case "b":
+              case "Boogie":
+              case "boogie":
+                MethodologySelection = Methodology.Boogie;
+                break;
+              case "vs":
+              case "visible-state":
+                MethodologySelection = Methodology.VisibleState;
+                break;
+              default:
+                ps.Error("Invalid argument \"{0}\" to option {1}", args[ps.i], ps.s);
+                break;
+            }
+          }
+          return true;
+
+        case "modifiesOnLoop":
+          ps.GetNumericArgument(ref LoopFrameConditions, 3);
+          return true;
+
+        case "modifiesDefault":
+          ps.GetNumericArgument(ref ModifiesDefault, 7);
+          return true;
+
+        case "localModifiesChecks": {
+            int localChecks = 0;
+            ps.GetNumericArgument(ref localChecks, 2);
+            LocalModifiesChecks = (localChecks != 0);
+          }
+          return true;
+
+        case "orderStrength":
+          ps.GetNumericArgument(ref OrderStrength, 2);
+          return true;
+
+        case "summationStrength":
+          ps.GetNumericArgument(ref SummationAxiomStrength, 2);
+          return true;
+
+        case "inductiveMinMax":
+          ps.GetNumericArgument(ref InductiveMinMax, 6);
+          return true;
+
+        case "fcoStrength":
+          ps.GetNumericArgument(ref FCOStrength, 6);
+          return true;
+
+        case "ownerModelEncoding":
+          if (ps.ConfirmArgumentCount(1)) {
+            switch (args[ps.i]) {
+              case "s":
+              case "standard":
+                OwnershipModelEncoding = OwnershipModelOption.Standard;
+                break;
+              case "e":
+              case "experimental":
+                OwnershipModelEncoding = OwnershipModelOption.Experimental;
+                break;
+              case "t":
+              case "trivial":
+                OwnershipModelEncoding = OwnershipModelOption.Trivial;
+                break;
+              default:
+                ps.Error("Invalid argument \"{0}\" to option {1}", args[ps.i], ps.s);
+                break;
+            }
+          }
+          return true;
+
+        case "forceBplErrors":
+          ForceBplErrors = true;
+          return true;
+
+        case "stdlib":
+          if (ps.ConfirmArgumentCount(1)) {
+            this.StandardLibraryLocation = args[ps.i];
+          }
+          return true;
+
+        default:
+          if (ps.CheckBooleanFlag("noConsistencyChecks", ref noConsistencyChecks, true) ||
+              ps.CheckBooleanFlag("noVerifyByDefault", ref NoVerifyByDefault) ||
+              ps.CheckBooleanFlag("useUncheckedContracts", ref UseUncheckedContracts) ||
+              ps.CheckBooleanFlag("arithDistributionAxioms", ref UseArithDistributionAxioms)
+            ) {
+            return true;
+          }
+          break;
+      }
+      // not an SscBoogie-specific option, so let the superclass handle it
+      return base.ParseOption(name, ps);
+    }
+
+    protected override void ApplyDefaultOptions() {
+      base.ApplyDefaultOptions();
+
+      if (LoopFrameConditions == -1) {
+        // /modifiesOnLoop not specified.  Set its default depending on /localModifiesChecks
+        if (LocalModifiesChecks) {
+          LoopFrameConditions = 1;
+        } else {
+          LoopFrameConditions = 2;
+        }
+      }
+
+      switch (InductiveMinMax) {
+        case 1:
+        case 2:
+        case 4:
+        case 5:
+          ReflectAdd = true;  // these InductiveMinMax modes imply ReflectAdd
+          break;
+        default:
+          break;
+      }
+
+      if (MethodologySelection == Methodology.VisibleState) {
+        OwnershipModelEncoding = OwnershipModelOption.Trivial;
+      }
+    }
+
+    public override void Usage() {
+      base.Usage();
+      Console.WriteLine(@"  ---- Spec# options ---------------------------------------------------------
+
+  If any of the following switches is included, only those methods specified
+  by some switch are translated into Boogie.  Furthermore, a method is
+  not translated if a [Verify(false)] attribute applies to it or if the
+  flag /trExclude applies (see below).
+  /translate:<str>
+                include method if its full name contains substring <str>
+  /trMethod:<method> 
+                include method if its name is <method>
+                Format:  Name or Class.Name
+  /trClass:<class>
+                include method if the enclosing class is <class>
+                Format:  Name or Qualification.Name
+  /trFile:<filename>
+                include method if it is contained in file <filename>
+                Format:  Filename.ssc
+
+  /trExclude:<str>
+                exclude method it its full name contains substring <str>
+
+  /c[ontracts]:<file>
+                apply the contracts from <file> to
+                the referenced assemblies of the input assembly.
+                Note: the contracts for Xyz must be in Xyz.Contracts
+  /methodology:<m>
+                selects the specification and verification methodology
+                  b = boogie (default)
+                  vs = visible-state
+  /level:<n>    0 - reduced checks,
+                1 - no modifies checking, 2 - full (default)
+  /useUncheckedContracts
+                generate purity axioms even when the postconditions
+                could not be checked to be sound (this option only for
+                experts and dare devils)
+  /modifiesDefault:<n>
+                0 - just what is declared
+                1 - what is declared plus E.snapshot for every top-level
+                    E.f, E.*, E.**, E[i], or E[*] in the modifies clause
+                2 - (1) but also for nested E's
+                3 - (1) plus this.snapshot
+                4 - (2) plus this.snapshot
+                5 - (default) (1) plus p.* for receiver parameter p not
+                    occurring at the top-level of modifies clause as
+                    p.f, p.*, p.**, p[i], p[*], or p.0
+                6 - (5) but for every parameter p
+  /modifiesOnLoop:<n>
+                0 - never, 1 - assume only (default),
+                2 - assume and check (default with /localModifiesChecks:0)
+  /localModifiesChecks
+                0 - check modifies-clause as post-condition of a procedure
+                1 - check violations of modifies-clause at each
+                    assignment and method call (default)
+  /noVerifyByDefault
+                change the default to [Verify(false)]
+  /orderStrength:<n>
+                0 (default) - only few properties of subtyping axiomatized,
+                1 - full strength
+  /summationStrength:<n>
+                0 - less applicable triggers in the axioms
+                1 - (default) default set of axioms for summation-like
+                    quantifiers;
+  /arithDistributionAxioms
+                emit +/* distribution axioms
+  /inductiveMinMax:<n>
+                0 (default) - extreme axioms for min/max;
+                1 - inductive axioms for min/max;
+                2 - both extreme and inductive axioms for min/max
+                3,4,5 - like 0,1,2 but adding the plus-over-min/max
+                        distribution axiom
+                Modes 1,2,4,5 imply /reflectAdd.
+  /fcoStrength:<n>
+                adjusts the amount of information encoded about 'first
+                consistent owners'
+                0 - no FCO axiom, 1 - cheaper but weaker FCO axiom,
+                2 - pure-method FCO axiom,
+                3, 4, 5 (default) - like 0,1,2 plus more specific
+                    FCO information on pure-method return
+  /ownerModelEncoding:<enc>
+                s = standard (default)
+                e = experimental
+                t = trivial (implied by /methodology:vs)
+");
+    }
+  }
+
+#endif

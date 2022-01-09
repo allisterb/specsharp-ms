@@ -1,0 +1,21 @@
+using Microsoft.Contracts;
+
+
+public class Quant2 {
+
+  public void Test0(int[] arr)
+    requires forall{int i in arr; 0 <= i};
+  {
+  }
+
+  public void Test1(object[]! arr)
+    requires forall{object o in arr; o != null};
+  {
+  }
+
+  public void Test2(Quant2[]! arr)
+    requires forall{Quant2 o in arr; o != null};
+  {
+  }
+
+}

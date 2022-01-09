@@ -12,7 +12,7 @@
          RootNamespace="UseMscorlibContracts"
          StartupObject=""
          StandardLibraryLocation=""
-         TargetPlatform="v2"
+         TargetPlatform="v4"
          TargetPlatformLocation=""
         >
         <Config Name="Debug"
