@@ -33,7 +33,7 @@
     <SccProvider>
     </SccProvider>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">

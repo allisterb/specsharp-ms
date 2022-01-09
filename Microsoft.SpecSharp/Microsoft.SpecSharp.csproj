@@ -43,7 +43,7 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -189,8 +189,9 @@
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.Build.Tasks.v4.0" />
     <Reference Include="Microsoft.Build.Utilities.v4.0" />
-    <Reference Include="Microsoft.SpecSharp.Runtime">
-      <HintPath>..\..\..\Users\Allister\Desktop\LastKnownGood11\Microsoft.SpecSharp.Runtime.dll</HintPath>
+    <Reference Include="Microsoft.SpecSharp.Runtime, Version=1.0.21126.0, Culture=neutral, PublicKeyToken=736440c9b414ea16, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Runtime\bin\Microsoft.SpecSharp.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
