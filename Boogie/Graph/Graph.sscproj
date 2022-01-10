@@ -2,20 +2,19 @@
 <VisualStudioProject>
   <XEN ProjectType="Local"
      SchemaVersion="1.0"
-     Name="System.Compiler.Contracts"
-     ProjectGuid="fbca6915-0e33-4a64-ab9e-afc976e89275"
+     Name="Graph"
+     ProjectGuid="4c28fb90-630e-4b55-a937-11a011b79765"
     >
     <Build>
       <Settings ApplicationIcon=""
-         AssemblyName="System.Compiler.Contracts"
+         AssemblyName="Graph"
          OutputType="Library"
-         RootNamespace="OutOfBandContracts"
+         RootNamespace="Graph"
          StartupObject=""
          StandardLibraryLocation=""
          TargetPlatform="v4"
          TargetPlatformLocation=""
-         ShadowedAssembly="..\..\..\bin\System.Compiler.dll"
-         NoStandardLibraries="True"
+         ShadowedAssembly=""
         >
         <Config Name="Debug"
            AllowUnsafeBlocks="False"
@@ -28,53 +27,65 @@
            FileAlignment="4096"
            IncrementalBuild="True"
            Optimize="False"
-           OutputPath="bin"
+           OutputPath="bin\debug"
            RegisterForComInterop="False"
            RemoveIntegerChecks="false"
            TreatWarningsAsErrors="False"
            WarningLevel="4"
+           ReferenceTypesAreNonNullByDefault="True"
+           RunProgramVerifier="False"
+           RunProgramVerifierWhileEditing="False"
+           ProgramVerifierCommandLineOptions=""
+           AllowPointersToManagedStructures="False"
+           CheckContractAdmissibility="True"
+           CheckPurity="False"
            />
         <Config Name="Release"
-           AllowUnsafeBlocks="False"
+           AllowUnsafeBlocks="false"
            BaseAddress="285212672"
-           CheckForOverflowUnderflow="False"
+           CheckForOverflowUnderflow="false"
            ConfigurationOverrideFile=""
-           DefineConstants="TRACE;DEBUG"
+           DefineConstants="TRACE"
            DocumentationFile=""
-           DebugSymbols="False"
+           DebugSymbols="false"
            FileAlignment="4096"
            IncrementalBuild="false"
-           Optimize="True"
-           OutputPath="bin"
-           RegisterForComInterop="False"
+           Optimize="true"
+           OutputPath="bin\release"
+           RegisterForComInterop="false"
            RemoveIntegerChecks="false"
-           TreatWarningsAsErrors="False"
+           TreatWarningsAsErrors="false"
            WarningLevel="4"
            />
       </Settings>
       <References>
-        <Reference Name="System.Compiler"
-             AssemblyName="System.Compiler"
-             Private="true"
-             HintPath="..\..\..\bin\System.Compiler.dll"
-             />
-        <Reference Name="System.Compiler.Runtime"
-             AssemblyName="System.Compiler.Runtime"
-             Private="true"
-             HintPath="..\..\..\bin\System.Compiler.Runtime.dll"
-             />
-        <Reference Name="mscorlib"
-             AssemblyName="mscorlib"
+        <Reference Name="System"
+             AssemblyName="System"
              Private="false"
-             HintPath="C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll"
+             />
+        <Reference Name="System.Data"
+             AssemblyName="System.Data"
+             Private="false"
+             />
+        <Reference Name="System.Xml"
+             AssemblyName="System.Xml"
+             Private="false"
              />
       </References>
     </Build>
     <Files>
       <Include>
-        <File RelPath="System.Compiler.ssc"
+        <File RelPath="Graph.ssc"
                  SubType="Code"
                  BuildAction="Compile"
+                 />
+        <File BuildAction="Compile"
+                 SubType="Code"
+                 RelPath="..\version.ssc"
+                 />
+        <File BuildAction="Compile"
+                 SubType="Code"
+                 RelPath="AssemblyInfo.ssc"
                  />
       </Include>
     </Files>

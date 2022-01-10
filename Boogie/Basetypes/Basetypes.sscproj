@@ -2,20 +2,18 @@
 <VisualStudioProject>
   <XEN ProjectType="Local"
      SchemaVersion="1.0"
-     Name="System.Compiler.Framework.Contracts"
-     ProjectGuid="395fb8c6-63cf-437e-aa57-cadcd6c17fa6"
+     Name="Basetypes"
+     ProjectGuid="0c692837-77ec-415f-bf04-395e3ed06e9a"
     >
     <Build>
       <Settings ApplicationIcon=""
-         AssemblyName="System.Compiler.Framework.Contracts"
+         AssemblyName="Basetypes"
          OutputType="Library"
-         RootNamespace="System.Compiler.Framework.Contracts"
+         RootNamespace="Basetypes"
          StartupObject=""
          StandardLibraryLocation=""
          TargetPlatform="v4"
          TargetPlatformLocation=""
-         ShadowedAssembly="..\..\..\bin\System.Compiler.Framework.dll"
-         NoStandardLibraries="True"
         >
         <Config Name="Debug"
            AllowUnsafeBlocks="False"
@@ -28,11 +26,13 @@
            FileAlignment="4096"
            IncrementalBuild="True"
            Optimize="False"
-           OutputPath="bin"
+           OutputPath="bin\debug"
            RegisterForComInterop="False"
            RemoveIntegerChecks="false"
            TreatWarningsAsErrors="False"
            WarningLevel="4"
+           CheckContractAdmissibility="True"
+           CheckPurity="False"
            />
         <Config Name="Release"
            AllowUnsafeBlocks="false"
@@ -45,46 +45,61 @@
            FileAlignment="4096"
            IncrementalBuild="false"
            Optimize="true"
-           OutputPath="bin"
+           OutputPath="bin\release"
            RegisterForComInterop="false"
            RemoveIntegerChecks="false"
            TreatWarningsAsErrors="false"
            WarningLevel="4"
+           CheckContractAdmissibility="True"
+           CheckPurity="False"
            />
       </Settings>
       <References>
-        <Reference Name="System.Compiler"
-             AssemblyName="System.Compiler"
-             Private="true"
-             HintPath="..\..\..\bin\System.Compiler.dll"
+        <Reference Name="System"
+             AssemblyName="System"
+             Private="false"
              />
-        <Reference Name="System.Compiler.Framework"
-             AssemblyName="System.Compiler.Framework"
-             Private="true"
-             HintPath="..\..\..\bin\System.Compiler.Framework.dll"
+        <Reference Name="System.Data"
+             AssemblyName="System.Data"
+             Private="false"
              />
-        <Reference Name="System.Compiler.Runtime"
-             AssemblyName="System.Compiler.Runtime"
-             Private="true"
-             HintPath="../../../bin/System.Compiler.Runtime.dll"
+        <Reference Name="System.Xml"
+             AssemblyName="System.Xml"
+             Private="false"
              />
-        <Reference Name="ParserHelper"
-             AssemblyName="ParserHelper"
-             Private="true"
-             HintPath="../../../bin/ParserHelper.dll"
+        <Reference Name="FSharp.Core"
+             AssemblyName="FSharp.Core"
+             Private="false"
+             HintPath="../../bin/FSharp.Core.dll"
              />
-        <Reference Name="mscorlib"
-             AssemblyName="mscorlib"
-             Private="true"
-             HintPath="C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll"
+        <Reference Name="FSharp.PowerPack"
+             AssemblyName="FSharp.PowerPack"
+             Private="false"
+             HintPath="../../bin/FSharp.PowerPack.dll"
              />
       </References>
     </Build>
     <Files>
       <Include>
-        <File RelPath="System.Compiler.Framework.ssc"
+        <File BuildAction="Compile"
                  SubType="Code"
-                 BuildAction="Compile"
+                 RelPath="BigNum.ssc"
+                 />
+        <File BuildAction="Compile"
+                 SubType="Code"
+                 RelPath="Rational.ssc"
+                 />
+        <File BuildAction="Compile"
+                 SubType="Code"
+                 RelPath="..\version.ssc"
+                 />
+        <File BuildAction="Compile"
+                 SubType="Code"
+                 RelPath="Set.ssc"
+                 />
+        <File BuildAction="Compile"
+                 SubType="Code"
+                 RelPath="AssemblyInfo.ssc"
                  />
       </Include>
     </Files>

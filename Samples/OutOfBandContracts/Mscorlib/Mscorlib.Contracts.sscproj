@@ -56,7 +56,7 @@
         <Reference Name="System.Compiler.Runtime"
              AssemblyName="System.Compiler.Runtime"
              Private="true"
-             HintPath="..\..\..\System.Compiler.Runtime\bin\System.Compiler.Runtime.dll"
+             HintPath="..\..\..\bin\System.Compiler.Runtime.dll"
              />
 		<Reference Name="mscorlib"
              AssemblyName="mscorlib"

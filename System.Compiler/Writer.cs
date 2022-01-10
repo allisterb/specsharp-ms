@@ -1457,8 +1457,8 @@ namespace System.Compiler{
       assemblyTable[0].MinorVersion = assembly.Version.Minor;
       assemblyTable[0].RevisionNumber = assembly.Version.Revision;
       assemblyTable[0].BuildNumber = assembly.Version.Build;
-      //if (assembly.PublicKeyOrToken != null && 0 < assembly.PublicKeyOrToken.Length)
-      //  assemblyTable[0].PublicKey = this.GetBlobIndex(assembly.PublicKeyOrToken);
+      if (assembly.PublicKeyOrToken != null && 0 < assembly.PublicKeyOrToken.Length)
+        assemblyTable[0].PublicKey = this.GetBlobIndex(assembly.PublicKeyOrToken);
       if (assembly.Name != null)
         assemblyTable[0].Name = this.GetStringIndex(assembly.Name);
       else
