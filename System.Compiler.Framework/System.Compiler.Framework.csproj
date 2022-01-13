@@ -107,10 +107,6 @@
     <Reference Include="Mscorlib">
       <Name>Mscorlib</Name>
     </Reference>
-    <Reference Include="ParserHelper, Version=0.0.0.0, Culture=neutral, PublicKeyToken=736440c9b414ea16, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Binaries\ParserHelper.dll</HintPath>
-    </Reference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
@@ -219,6 +215,7 @@
     <Compile Include="LanguageService\Scanner.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ParserHelper.cs" />
     <Compile Include="Query\QueryComposer.cs">
       <SubType>Code</SubType>
     </Compile>

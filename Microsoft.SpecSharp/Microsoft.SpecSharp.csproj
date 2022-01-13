@@ -189,9 +189,8 @@
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.Build.Tasks.v4.0" />
     <Reference Include="Microsoft.Build.Utilities.v4.0" />
-    <Reference Include="Microsoft.SpecSharp.Runtime, Version=1.0.21126.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\Microsoft.SpecSharp.Runtime.dll</HintPath>
+    <Reference Include="Microsoft.SpecSharp.Runtime">
+      <HintPath>Runtime\bin\Microsoft.SpecSharp.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
