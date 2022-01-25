@@ -1,3 +1,0 @@
-[submodule "ext/boogie"]
-	path = ext/boogie
-	url = https://github.com/boogie-org/boogie.git
