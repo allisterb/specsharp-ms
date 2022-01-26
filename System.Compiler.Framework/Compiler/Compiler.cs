@@ -454,14 +454,17 @@ namespace System.Compiler{
           if (!this.ParseCompilerOption(options, arg, errors))
             errors.Add(this.CreateErrorNode(Error.InvalidCompilerOption, arg));
         }else {
+          /*
           // allow URL syntax
           string s = arg.Replace('/', BetterPath.DirectorySeparatorChar);
           // allow wildcards
+          string path = s;
           string path = (arg.IndexOf("\\")<0) ? ".\\" : BetterPath.GetDirectoryName(arg);
           string pattern = BetterPath.GetFileName(arg);
           string extension = BetterPath.HasExtension(pattern) ? BetterPath.GetExtension(pattern) : "";
           bool notAFile = true;
           if (path != null && Directory.Exists(path)){
+            
             foreach (string file in Directory.GetFiles(path, pattern)){
               string ext = BetterPath.HasExtension(file) ? BetterPath.GetExtension(file) : "";
               if (string.Compare(extension, ext, true, System.Globalization.CultureInfo.InvariantCulture) != 0) continue;
@@ -469,9 +472,14 @@ namespace System.Compiler{
               notAFile = false;
             }
           }
-          if (notAFile && checkSourceFiles){
+          */
+          if (!File.Exists(arg) && checkSourceFiles){
             errors.Add(this.CreateErrorNode(Error.SourceFileNotRead, arg, this.CreateErrorNode(Error.NoSuchFile, arg).GetMessage()));
             gaveFileNotFoundError = true;
+          }
+          else
+          {
+            filesToCompile.Add(arg);
           }
         }
       }
