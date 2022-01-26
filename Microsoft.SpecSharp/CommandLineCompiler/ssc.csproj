@@ -102,17 +102,17 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="..\..\Common\InterimKey.snk">
+    <None Include="../../common/InterimKey.snk">
       <Link>InterimKey.snk</Link>
     </None>
-    <Compile Include="..\..\Common\Include\version.cs">
+    <Compile Include="../../common/Include/version.cs">
       <Link>version.cs</Link>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Main.cs">
+    <Compile Include="main.cs">
       <SubType>Code</SubType>
     </Compile>
     <EmbeddedResource Include="Messages.resx">

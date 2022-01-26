@@ -18,7 +18,7 @@
     <AssemblyKeyContainerName>
     </AssemblyKeyContainerName>
     <AssemblyName>System.Compiler.Runtime</AssemblyName>
-    <AssemblyOriginatorKeyFile>..\Common\InterimKey.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>../common/InterimKey.snk</AssemblyOriginatorKeyFile>
     <DefaultClientScript>JScript</DefaultClientScript>
     <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
     <DefaultTargetSchema>IE50</DefaultTargetSchema>
@@ -124,7 +124,7 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Common\Include\version.cs">
+    <Compile Include="../common/Include/version.cs">
       <Link>version.cs</Link>
       <SubType>Code</SubType>
     </Compile>
@@ -140,7 +140,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Common\InterimKey.snk">
+    <None Include="../common/InterimKey.snk">
       <Link>InterimKey.snk</Link>
     </None>
   </ItemGroup>
