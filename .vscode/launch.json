@@ -10,8 +10,8 @@
             "request": "launch",
             "env": {},
             "program": "${workspaceFolder}/bin/ssc.exe",
-            "args": ["Prelude.sscproj"],
-            "cwd": "~",
+            "args": ["../../../../mnt/c/Projects/Silver/tests/TestProjects/Prelude/Prelude.sscproj"],
+            "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "console": "internalConsole"
         }

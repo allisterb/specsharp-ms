@@ -39,7 +39,7 @@
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <ConfigurationOverrideFile>
     </ConfigurationOverrideFile>
-    <DefineConstants>TRACE;DEBUG;WHIDBEY</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;WHIDBEY;ROTOR;NoData</DefineConstants>
     <DebugSymbols>true</DebugSymbols>
     <FileAlignment>4096</FileAlignment>
     <IncrementalBuild>false</IncrementalBuild>

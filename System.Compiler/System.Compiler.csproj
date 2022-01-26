@@ -44,7 +44,7 @@
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <ConfigurationOverrideFile>
     </ConfigurationOverrideFile>
-    <DefineConstants>TRACE;DEBUG;ExtendedRuntime;WHIDBEY;WHIDBEYwithGenericsAndIEqualityComparer;AllowCsharpConstructorSyntax;ILOFFSETS</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;ExtendedRuntime;WHIDBEY;WHIDBEYwithGenericsAndIEqualityComparer;AllowCsharpConstructorSyntax;ILOFFSETS;ROTOR;NoData</DefineConstants>
     <DebugSymbols>true</DebugSymbols>
     <FileAlignment>4096</FileAlignment>
     <IncrementalBuild>false</IncrementalBuild>
