@@ -1,0 +1,2 @@
+#!/bin/bash
+xbuild Microsoft.SpecSharp/CommandLineCompiler/ssc.csproj /p:Configuration=Debug /p:WarningLevel=3
