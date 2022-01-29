@@ -10,7 +10,7 @@
             "request": "launch",
             "env": {},
             "program": "${workspaceFolder}/bin/ssc.exe",
-            "args": ["../../../../mnt/c/Projects/Silver/tests/TestProjects/Prelude/Prelude.sscproj"],
+            "args": ["/mnt/c/Projects/Silver/ext/StratisSmartContractsSamples/src/HelloBlockchainContract/HelloBlockchainContract/HelloBlockchain.cs"],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "console": "internalConsole"

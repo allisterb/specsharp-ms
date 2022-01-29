@@ -14,7 +14,8 @@
                 "/property:Configuration=Debug",
                 "/t:build",
                 // Do not generate summary otherwise it leads to duplicate errors in Problems panel
-                "/consoleloggerparameters:NoSummary"
+                "/consoleloggerparameters:NoSummary",
+                "/verbosity:minimal"
             ],
             "group": "build",
             "presentation": {
