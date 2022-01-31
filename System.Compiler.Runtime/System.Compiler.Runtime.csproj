@@ -45,7 +45,7 @@
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <ConfigurationOverrideFile>
     </ConfigurationOverrideFile>
-    <DefineConstants>DEBUG;TRACE;WHIDBEY;WHIDBEYwithGenerics</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;WHIDBEY;WHIDBEYwithGenerics</DefineConstants>
     <DocumentationFile>
     </DocumentationFile>
     <DebugSymbols>true</DebugSymbols>

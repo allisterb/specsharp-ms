@@ -450,7 +450,7 @@ namespace System.Compiler{
           if (alreadySeenResponseFiles == null) alreadySeenResponseFiles = new Hashtable();
           string[] fileNames = this.ParseOptionBatch(options, arg, errors, alreadySeenResponseFiles);
           if (fileNames != null) filesToCompile.AddRange(fileNames);
-        }else if (ch == '-'){
+        }else if (ch == '-' || arg.StartsWith("/r:")){
           if (!this.ParseCompilerOption(options, arg, errors))
             errors.Add(this.CreateErrorNode(Error.InvalidCompilerOption, arg));
         }else {
